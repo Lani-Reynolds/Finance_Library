@@ -11,8 +11,3 @@ class User:
         if input != self.password:
             return False
         return True
-
-admin_user = User("John", "password123")
-
-def Login():
-    print(admin_user.Verify_Password("asdflkajksdfl"))
