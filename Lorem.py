@@ -1,15 +1,7 @@
-from dataclasses import dataclass
-
-
-NEWLINE = "\n"
-    
 def Get_Assets(PO:object) -> list:
     order = PO.order
     assets:list = [(item.name, item.flat_price) for item in order]
     return assets
-
-def Cost_Of_Goods(order:list):
-    return sum([round((item.flat_price * item.quantity), 2) for item in order])
 
 def Expenses_Receipt(order:list):
     receipt = ""
@@ -73,21 +65,3 @@ if __name__ == '__main__':
         Item("Orange", 0.11, 25000),
         Item("Pear", 0.15, 2500),
     ]
-    
-    with open("datalog.txt", "w+") as DataLog:
-        DataLog.write(str(Get_Assets(production_order1)) + "\n" * 2)
-        DataLog.write(str(Cost_Of_Goods(order1)) + "\n" * 2)
-        DataLog.write(str(Cost_Of_Goods(order2)) + "\n" * 2)
-        DataLog.write(str(Expenses_Receipt(order1)) + "\n" * 2)
-        DataLog.write(str(Expenses_Receipt(order2)) + "\n" * 2)
-        DataLog.write(str(Retail_Revenue(order1)) + "\n" * 2)
-        DataLog.write(str(Retail_Revenue(order2)) + "\n" * 2)
-        DataLog.write(str(Revenue_Receipt(order1)) + "\n" * 2)
-        DataLog.write(str(Revenue_Receipt(order2)) + "\n" * 2)
-        DataLog.write(str(Income(order1)) + "\n" * 2)
-        DataLog.write(str(Income(order2)) + "\n" * 2)
-        
-        for asset_group in admin_user.total_assets:
-            for item in asset_group:
-                DataLog.write(str(item) + "\n")
-            DataLog.write("\n" * 2)

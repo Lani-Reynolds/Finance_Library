@@ -1,0 +1,6 @@
+A library/application that can be used by a business owner or entrapeuner.
+It will be extensible by someone who knows how to program, we won't write documentation, but we will program it using Python's modularity principles to acheive this.
+
+Inside the library/application will be a GUI that is used to pass information into the library, however we will add support for CSV and other alternative data inputs. This is just for us to test, and for ease of use by someone who just wants to use "Prosper" standalone.
+
+If the scipt is called as a application, the GUI base of the application will initialize and run by default. If the library is imported from another script, and that script is used, the external script will have to use the CSV, and other file format parsing to be able to input data, including admin_user data. Imagine it like a punch card. A datalog will be created to keep track of local data, that the program can read again when and if it's launched, but the data stands alone on it's own, and it interpretable without the application.
