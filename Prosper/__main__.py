@@ -1,3 +1,5 @@
+# This is run when you call it as a "program"
+
 from GUI import GUI
 GUI()
 
