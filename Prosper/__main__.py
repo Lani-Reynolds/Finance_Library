@@ -1,61 +1,50 @@
 # This is run when you call it as a "program"
 from CleanUp import PyCacheCleanUp
 
-import tkinter as tk
-from tkinter import HORIZONTAL, ttk
+from tkinter import Tk, Button
+from tkinter.ttk import Frame, Label, Style
 
-from OrderRecorder import OrderRecorder
+from OrderRecorder import Order_Recorder
+from SaleRecorder import Sale_Recorder
 
-class App(tk.Tk):
-    def __init__(self):
-        super().__init__()
-        
-        self.title('My Awesome App')
-        self.geometry('200x200')
-        self.grid_columnconfigure(0, weight=1)
-        self.grid_rowconfigure(0, weight=1)
-        self.grid_rowconfigure(1, weight=5)
-        self.grid_rowconfigure(2, weight=1)
 
-class MainFrame(ttk.Frame):
-    def __init__(self, container):
-        super().__init__(container)
+def Application():
+    Root = Tk()
+    
+    Root.title('Prosper')
+    Root.geometry('1000x800')
 
-        self.label = ttk.Label(self, text='Hello, Tkinter!')
-        self.label.grid(column=0, row=0)
-        
-        self.separator_frame = ttk.Frame(self)
-        self.separator_frame.grid(column=0, row=1, sticky='nsew', pady=5)
+    Root.grid_columnconfigure(0, weight=1)
+    Root.grid_rowconfigure(0, weight=1)
 
-        self.button = ttk.Button(self, text='Click Me')
-        self.button['command'] = self.OrderRecorderButton
-        self.button.grid(column=0, row=2)
+    return Root
 
-        self.grid(column=0, row=0)
 
-    def OrderRecorderButton(self):
-        OrderRecorder(self)
+def Main_Frame(Root):
+    MainFrame = Frame(Root, style='MainMenu.TFrame')
+    Title = Label(MainFrame, text='Pick a menu', anchor='center', style='Title.TLabel', padding=40)
+    OrderRecorderButton = Button(MainFrame, activeforeground='#f0ead2', activebackground='#adc178', fg='#dde5b6', bg='#adc178', padx=10, pady=10, text='Record an order', command=lambda: Order_Recorder(Root))
+    SaleRecorderButton = Button(MainFrame, activeforeground='#f0ead2', activebackground='#adc178', fg='#dde5b6', bg='#adc178', padx=10, pady=10, text='Record a sale', command=lambda: Sale_Recorder(Root))
+    MainFrameStyle = Style()
+    TitleStyle = Style()
+
+    MainFrameStyle.configure('MainMenu.TFrame', background='#6c584c')
+    TitleStyle.configure('Title.TLabel', foreground='#dde5b6', background='#a98467', font=('Calibri Light', 50))
+    OrderRecorderButton.configure(font=('Calibri Light', 20))
+    SaleRecorderButton.configure(font=('Calibri Light', 20))
+
+    MainFrame.grid(column=0, row=0, sticky='nsew')
+    Title.grid(column=0, row=0, sticky='ew')
+    OrderRecorderButton.grid(column=0, row=1)
+    SaleRecorderButton.grid(column=0, row=2, sticky='n')
+    
+    MainFrame.grid_columnconfigure(0, weight=1)
+    MainFrame.grid_rowconfigure(1, weight=1)
+    MainFrame.grid_rowconfigure(2, weight=3)
 
 
 if __name__ == "__main__":
-    app = App()
-    frame = MainFrame(app)
-    app.mainloop()
-# main_frame = ttk.Frame(root, width=200, height=200, style='MainMenu.TFrame')
-# main_frame_style = ttk.Style()
-# title = ttk.Label(main_frame, text="Pick menu:", style='Title.TLabel')
-# title_style = ttk.Style()
-# order_recorder_button = ttk.Button(main_frame, text="Record an order", default="active", command=OrderRecorderCallback)
-
-# root.title("Prosper")
-# root.geometry("200x200")
-# main_frame_style.configure('MainMenu.TFrame', background='aquamarine', borderwidth=5, relief='raised')
-# title_style.configure('Title.TLabel', background='aquamarine')
-
-# main_frame.grid(column=0, row=0, sticky=(N, W, E, S))
-# title.grid(column=0, row=0)
-# order_recorder_button.grid(column=0, row=1)
-
-
-# root.mainloop()
-PyCacheCleanUp()
+    Window = Application()
+    Main_Frame(Window)
+    Window.mainloop()
+    PyCacheCleanUp()
